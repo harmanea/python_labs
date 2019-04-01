@@ -71,6 +71,16 @@ def fib(n):
     return next(f)
 
 
+def my_range(limit, start=0, step=1):
+    if step == 0:
+        raise ValueError
+
+    n = start
+    while (step < 0 or n < limit) and (step > 0 or n > limit):
+        yield n
+        n += step
+
+
 if __name__ == '__main__':  # test the implementations
     print(my_sum(1, 2, 3))
     print(my_sum(-5, 4, 18, -25))
@@ -89,3 +99,7 @@ if __name__ == '__main__':  # test the implementations
 
     print(fib(5))
     print(fib(10))
+
+    print(list(my_range(10)))
+    print(list(my_range(10, start=5, step=2)))
+    print(list(my_range(0, start=100, step=-5)))
