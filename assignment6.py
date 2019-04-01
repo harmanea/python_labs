@@ -8,7 +8,7 @@ def my_sum(*args):
     return reduce(add, args)
 
 
-def is_palindrome(word):
+def is_palindrome(word: str) -> bool:
     n = len(word)
 
     for i in range(n // 2):
@@ -18,39 +18,35 @@ def is_palindrome(word):
     return True
 
 
-def generate_password(length=8, special_chars_num=2):
-    if special_chars_num > length:
+def generate_password(length: int = 8, special_chars: int = 2) -> str:
+    if special_chars > length:
         raise ValueError
 
-    special_chars = ['@', '?', '$', '#', '%', '&']
-    special_chars_indexes = rnd.sample(range(length), special_chars_num)
+    indexes = rnd.sample(range(length), special_chars)
 
     password = ''
     for i in range(length):
-        if i in special_chars_indexes:
-            password += rnd.choice(special_chars)
+        if i in indexes:
+            password += rnd.choice(string.punctuation)
         else:
             password += rnd.choice(string.ascii_letters)
 
     return password
 
 
-def my_map(lst, fun):
+def my_map(lst: list, fun):
     return [fun(x) for x in lst]
 
 
-def reverse_string(string):
-    return string[::-1]
+def reverse_string(word: str):
+    return word[::-1]
 
 
-def fibo_gen(n):
-    oldest = 1
-    old = 1
+def fibo_gen(n: int):
+    f = fibonacci()
 
-    for i in range(n):
-        new = oldest + old
-        oldest, old = old, new
-        yield new
+    for _ in range(n):
+        yield next(f)
 
 
 def fibonacci():
@@ -63,7 +59,7 @@ def fibonacci():
         yield new
 
 
-def fib(n):
+def fib(n: int):
     f = fibonacci()
     for _ in range(n - 1):
         next(f)
@@ -71,7 +67,7 @@ def fib(n):
     return next(f)
 
 
-def my_range(limit, start=0, step=1):
+def my_range(limit: int, start: int = 0, step: int = 1):
     if step == 0:
         raise ValueError
 
@@ -90,7 +86,7 @@ if __name__ == '__main__':  # test the implementations
     print(is_palindrome('not a palindrome'))
 
     print(generate_password())
-    print(generate_password(length=20, special_chars_num=5))
+    print(generate_password(length=20, special_chars=5))
 
     print(my_map(['one', 'two', 'three'], reverse_string))
 
