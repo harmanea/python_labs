@@ -23,7 +23,7 @@ def generate_password(length=8, special_chars_num=2):
         raise ValueError
 
     special_chars = ['@', '?', '$', '#', '%', '&']
-    special_chars_indexes = rnd.sample(list(range(length)), special_chars_num)
+    special_chars_indexes = rnd.sample(range(length), special_chars_num)
 
     password = ''
     for i in range(length):
@@ -33,6 +33,14 @@ def generate_password(length=8, special_chars_num=2):
             password += rnd.choice(string.ascii_letters)
 
     return password
+
+
+def my_map(lst, fun):
+    return [fun(x) for x in lst]
+
+
+def reverse_string(string):
+    return string[::-1]
 
 
 if __name__ == '__main__':  # test the implementations
@@ -45,3 +53,5 @@ if __name__ == '__main__':  # test the implementations
 
     print(generate_password())
     print(generate_password(length=20, special_chars_num=5))
+
+    print(my_map(['one', 'two', 'three'], reverse_string))
