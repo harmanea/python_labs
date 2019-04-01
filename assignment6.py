@@ -43,6 +43,34 @@ def reverse_string(string):
     return string[::-1]
 
 
+def fibo_gen(n):
+    oldest = 1
+    old = 1
+
+    for i in range(n):
+        new = oldest + old
+        oldest, old = old, new
+        yield new
+
+
+def fibonacci():
+    oldest = 1
+    old = 1
+
+    while True:
+        new = oldest + old
+        oldest, old = old, new
+        yield new
+
+
+def fib(n):
+    f = fibonacci()
+    for _ in range(n - 1):
+        next(f)
+
+    return next(f)
+
+
 if __name__ == '__main__':  # test the implementations
     print(my_sum(1, 2, 3))
     print(my_sum(-5, 4, 18, -25))
@@ -55,3 +83,9 @@ if __name__ == '__main__':  # test the implementations
     print(generate_password(length=20, special_chars_num=5))
 
     print(my_map(['one', 'two', 'three'], reverse_string))
+
+    print([x for x in fibo_gen(10)])
+    print(fibo_gen(15))
+
+    print(fib(5))
+    print(fib(10))
