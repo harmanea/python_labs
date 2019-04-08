@@ -41,34 +41,42 @@ class Formatter:
 
 
 if __name__ == '__main__':  # test the implementation
-    log = Logger('My Logger')
+    # Get a logger
+    logger = Logger('My Logger')
 
+    # And a couple printers
     printer = Printer(lambda msg: print(msg))
     err_printer = Printer(lambda msg: print(msg, file=sys.stderr))
 
-    log.add_printer(printer)
-    log.add_printer(err_printer)
-    log.set_level(3)
+    logger.add_printer(printer)
+    logger.add_printer(err_printer)
+    logger.set_level(3)
 
-    log.log(5, 'This is a message')
-    log.log(2, 'Level is too low')
+    # Try logging with different levels
+    logger.log(5, 'This is a message')
+    logger.log(2, 'Level is too low')  # this shouldn't be printed
 
-    log.set_level(1)
+    logger.set_level(1)
+    logger.log(2, 'now it\'s okay') # this should now be printed
 
-    log.log(2, 'now it\'s okay')
-
+    # Now with formatters
     formatter = Formatter(lambda logger, msg: f'{logger.name}: {msg}')
     now_formatter = Formatter(lambda logger, msg: f'{datetime.datetime.now()}: {msg}')
 
-    print(formatter.format(log, 'A cool msg'))
-    print(now_formatter.format(log, 'Another cool msg'))
+    # Try the formatters
+    print(formatter.format(logger, 'A cool msg'))
+    print(now_formatter.format(logger, 'Another cool msg'))
 
-    log = Logger('Logger with formatters')
+    # Get a fresh new logger
+    logger = Logger('Logger with formatters')
 
-    printer = Printer(lambda msg: print(msg), formatter)
-    other_printer = Printer(lambda msg: print(msg), now_formatter)
+    # Simple printers with the new formatters
+    printer = Printer(formatter=formatter)
+    other_printer = Printer(formatter=now_formatter)
 
-    log.add_printer(printer)
-    log.add_printer(other_printer)
+    logger.add_printer(printer)
+    logger.add_printer(other_printer)
 
-    log.log(2, 'Message with formatters')
+    # Try it out
+    logger.log(2, 'Message with formatters')
+    logger.log(4, 'Another message')
