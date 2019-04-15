@@ -47,13 +47,10 @@ class Sum(Command, ABC):
         return 'usage: sum a b [c]*\nPrints a sum of the given int arguments.'
 
     def execute(self, *args):
-        try:
-            result = 0
-            for arg in args:
-                result += int(arg)
-            print(result)
-        except ValueError as error:
-            print(error)
+        result = 0
+        for arg in args:
+            result += int(arg)
+        print(result)
 
 
 if __name__ == '__main__':
@@ -86,7 +83,12 @@ if __name__ == '__main__':
         else:
             for command in commands:
                 if tokens[0] == command.name():
-                    command.execute(*tokens[1:])
+                    try:
+                        command.execute(*tokens[1:])
+                    except Exception as e:
+                        print('The command encountered an Error!')
+                        print(e)
+                        print('Type "help command_name" for info on how to use that command.')
                     break
             else:
                 print('Invalid command!')
