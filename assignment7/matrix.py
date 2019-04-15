@@ -2,6 +2,7 @@ import random as rnd
 import operator
 
 
+# I don't really know what the assignment intended so the matrix can only be accessed using the [][] operator
 class Matrix:
     def __init__(self, rows: int, cols: int):
         if cols < 1 or rows < 1:
