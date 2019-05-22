@@ -8,7 +8,7 @@ def size(all_instances):
             if args:
                 return func(*args, **kwargs)
             else:
-                return sum([cache.entries_count() for cache in all_instances()])
+                return sum([func(x) for x in all_instances()])
 
         return wrapper
     return decorator
@@ -35,7 +35,7 @@ class Cache:
         return len(self._storage)
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # test the implementation
     a = Cache()
     b = Cache()
 
