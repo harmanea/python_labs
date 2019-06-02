@@ -12,6 +12,7 @@ from multiprocessing import Pool, cpu_count
 from datetime import datetime
 from os.path import basename, splitext, join
 
+
 def download_images(*urls):
     pool = Pool(cpu_count())  # number of concurrent processes can be limited here
 
