@@ -1,5 +1,12 @@
 import collections
 
+# Feedback:
+#
+#     + Seems to work.
+#     + Nice code formatting.
+#     ? Will this work if I explicitly set the value to be the same as the default?
+#
+# Attendance points awarded.
 
 class metaStrukt(type):
     def __new__(mcs, name, bases, namespace):
