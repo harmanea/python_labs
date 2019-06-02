@@ -1,8 +1,16 @@
+# Feedback:
+#
+#     + Nice solution!
+#     + Cool use of union to avoid having to share state between coroutines.
+#       (Though it's not hard to do.)
+#     - Hashbang missing.
+#
+# Sorry it took so long (again). Good luck with the exam.
+
 import urllib, urllib.request
 from multiprocessing import Pool, cpu_count
 from datetime import datetime
 from os.path import basename, splitext, join
-
 
 def download_images(*urls):
     pool = Pool(cpu_count())  # number of concurrent processes can be limited here
